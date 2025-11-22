@@ -1,0 +1,14 @@
+/* Test if Tailwind is processing */
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add a custom test style */
+.test-tailwind {
+  @apply bg-blue-500 text-white p-4 rounded;
+}
+
+body {
+  background-color: #f3f4f6; /* Force a background to test */
+}
