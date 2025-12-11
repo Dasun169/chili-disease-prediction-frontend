@@ -31,19 +31,49 @@ const PredictDisease = () => {
   };
 
   const handlePredict = async () => {
+    if (!selectedImage) return;
+  
     setLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setPrediction({
-        disease: "Bacterial Spot",
-        confidence: 92.5,
-        severity: "Medium",
-        recommendation:
-          "Apply copper-based fungicide and remove affected leaves",
+    setPrediction(null); // Clear previous prediction
+  
+    const formData = new FormData();
+    // 'image' must match the key used in the Flask backend: request.files['image']
+    formData.append("image", selectedImage);
+  
+    try {
+      const response = await fetch("http://127.0.0.1:5000/predict", {
+        method: "POST",
+        // No 'Content-Type' header needed for FormData
+        body: formData,
       });
+  
+      if (!response.ok) {
+        // Handle non-200 responses (e.g., server error)
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const result = await response.json();
+  
+      // The Flask backend now sends the necessary fields:
+      setPrediction({
+        disease: result.disease,
+        confidence: result.confidence,
+        severity: result.severity,
+        recommendation: result.recommendation,
+      });
+    } catch (error) {
+      console.error("Prediction failed:", error);
+      // Display an error message to the user
+      setPrediction({
+        disease: "Prediction Failed",
+        confidence: 0,
+        severity: "Error",
+        recommendation: `Could not connect to the prediction server. Error: ${error.message}`,
+      });
+    } finally {
       setLoading(false);
-    }, 2000);
-  };
+    }
+  };  
 
   const clearImage = () => {
     setSelectedImage(null);
@@ -120,7 +150,7 @@ const PredictDisease = () => {
               animate={{ opacity: 1 }}
               onClick={handlePredict}
               disabled={loading}
-              className="w-full mt-6 bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full mt-6 bg-gray-600 text-white py-3 rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "Analyzing..." : "Predict Disease"}
             </motion.button>
