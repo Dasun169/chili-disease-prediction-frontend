@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import profileImg from "../assets/Dp.png";
 import {
   Leaf,
   Target,
@@ -145,8 +146,12 @@ const About = () => {
         className="bg-white rounded-xl shadow-lg p-8 border border-gray-200"
       >
         <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="w-32 h-32 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
-            <span className="text-4xl font-bold text-white">DN</span>
+          <div className="w-40 h-50 rounded-full overflow-hidden flex-shrink-0 shadow-lg border-4 border-primary-500">
+            <img
+              src={profileImg}
+              alt="Dasun Navindu Dewnith"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="flex-1 text-center md:text-left">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">
