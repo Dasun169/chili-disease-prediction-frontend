@@ -33,7 +33,7 @@ const NutrientSurveyModal = ({ onClose, onPredictionSuccess }) => {
         setError(null);
 
         try {
-            const response = await fetch("http://127.0.0.1:5000/predict-nutrient-element", {
+            const response = await fetch("https://dasunnavindu-chili-disease-backend.hf.space/predict-nutrient-element", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(surveyData),
@@ -78,7 +78,7 @@ const NutrientSurveyModal = ({ onClose, onPredictionSuccess }) => {
     // --- REVISED JSX FOR STYLING ---
     return (
         // Modal Container with BLUR effect
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md"> {/* Use z-[100] for maximum stacking priority */}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/30 backdrop-blur-md"> {/* Use z-[100] for maximum stacking priority */}
             <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -230,7 +230,7 @@ const PredictDisease = () => {
     formData.append("image", selectedImage);
   
     try {
-      const response = await fetch("http://127.0.0.1:5000/predict", {
+      const response = await fetch("https://dasunnavindu-chili-disease-backend.hf.space/predict", {
         method: "POST",
         body: formData,
       });
