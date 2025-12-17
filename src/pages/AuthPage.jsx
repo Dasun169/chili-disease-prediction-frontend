@@ -60,7 +60,7 @@ const AuthPage = () => {
             <p className="text-xl text-primary-100 mb-8">
               Advanced AI-powered disease detection for healthier crops
             </p>
-            <div className="flex gap-8 justify-center">
+            {/* <div className="flex gap-8 justify-center">
               <div className="text-center">
                 <div className="text-4xl font-bold">95%</div>
                 <div className="text-sm text-primary-200">Accuracy</div>
@@ -73,7 +73,7 @@ const AuthPage = () => {
                 <div className="text-4xl font-bold">Fast</div>
                 <div className="text-sm text-primary-200">Results</div>
               </div>
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </div>
